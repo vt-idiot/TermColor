@@ -22,7 +22,7 @@ TerminalsController::TerminalsController(TerminalsModel *t, const ColorsModel &c
 }
 
 void TerminalsController::doTerminals() {
-    const auto &terminals = terminalsModel_->getTerminals();
+/*     const auto &terminals = terminalsModel_->getTerminals();
     auto supportedTerminals = terminals.supported_;
     std::vector<std::string> terminalsFound; // Found terminals in /bin
 
@@ -50,7 +50,10 @@ void TerminalsController::doTerminals() {
     } else {
         // Populate model with new terminals
         terminalsModel_->insertTerminals(terminalsFound);
-    }
+    } */
+    // Functionality to search for terminals in /bin has been disabled.
+    // Emit signal to indicate no terminals were found.
+    emit noTerminalsFound();
 }
 
 std::string currentTimestamp() {

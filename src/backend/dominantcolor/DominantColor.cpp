@@ -57,7 +57,7 @@ void DominantColor::DominantColorImpl::doKMeans(const cv::Mat &img, cv::Mat &lab
             img,
             clusterCount,
             labels,
-            cv::TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 10, 0.01),
+            cv::TermCriteria(cv::TermCriteria::MAX_ITER|cv::TermCriteria::EPS, 10, 0.01),
             attempts,
             cv::KMEANS_PP_CENTERS,
             centers

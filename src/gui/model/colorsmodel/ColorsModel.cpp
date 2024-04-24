@@ -25,9 +25,13 @@ private:
 
 ColorsModel::ColorsModelImpl::ColorsModelImpl(ColorsModel &p) : parent_{p}, colors_{} {}
 
-void ColorsModel::ColorsModelImpl::setImagePath(const QString &path) {
+/* void ColorsModel::ColorsModelImpl::setImagePath(const QString &path) {
     const auto pathStr = path.toStdString(); // "file:///home/username/Pictures/xxxxxxx.png"
     imagePath_ = pathStr.substr(7);          // removes "file://"
+} */
+
+void ColorsModel::ColorsModelImpl::setImagePath(const QString &path) {
+    imagePath_ = path.toStdString();
 }
 
 const std::string &ColorsModel::ColorsModelImpl::getImagePath() const {

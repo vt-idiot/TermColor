@@ -23,22 +23,12 @@ void DropArea::dropEvent(QDropEvent *event) {
     const QMimeData *mimeData = event->mimeData();
 
     if (mimeData->hasUrls()) {
-        // There is only ONE available text/url that we can read,
-        // therefore there's no need to loop through mimeData->urls()
-        auto picLocation = mimeData->urls().at(0).toString();
-        const auto picLocationStr = picLocation.toStdString();
-
-        // Remove new line symbol ("\r\n") in case it gets appended to the dropped mimeData
-        const std::string newLn {"\r\n"};
-        const auto &loc = picLocationStr.find(newLn);
-        if (loc != std::string::npos) {
-            const auto goodStr = picLocationStr.substr(0, loc);
-
-            // Replace picLocation with correct input
-            picLocation.clear();
-            picLocation = QString::fromStdString(goodStr);
+        QList<QUrl> urlList = mimeData->urls();
+        if (!urlList.isEmpty()) {
+            // Convert the first URL to a local file path
+            QString localPath = urlList.first().toLocalFile();
+            emit imageDropped(localPath);
         }
-        emit imageDropped(picLocation);
     }
 
     setBackgroundRole(QPalette::Midlight);

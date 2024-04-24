@@ -9,6 +9,9 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/src/backend/dominantcolor/ # to have a shorter path to DominantColor.h
 )
 
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+
 target_sources(${DOMINANTCOLORTEST_TARGET}
   PRIVATE
   DominantColorTest.h
@@ -21,6 +24,10 @@ target_link_libraries(${DOMINANTCOLORTEST_TARGET}
   Qt5::Core
   Qt5::Test
   ${OpenCV_LIBS}
+)
+
+set_target_properties(${DOMINANTCOLORTEST_TARGET} PROPERTIES
+  LINK_FLAGS "-static"
 )
 
 add_test(DominantColorTest

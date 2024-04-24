@@ -81,7 +81,7 @@ void ExportWidget::ExportWidgetImpl::doConnections() {
     // Save-to-json button
     connect(jsonButton_, &QPushButton::clicked, [=]() {
         QString fileName = QFileDialog::getSaveFileName(this,
-                tr("Export to JSON"), "/home/" + QString::fromStdString(Writer::getUsername()), tr("JSON file (*.json)"));
+                tr("Export to JSON"), QDir::currentPath(), tr("JSON file (*.json)"));
 
         if (!fileName.isEmpty()) {
             emit parent_->saveToJsonBtnClicked(fileName.toStdString());
